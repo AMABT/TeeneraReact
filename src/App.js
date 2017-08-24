@@ -1,27 +1,17 @@
 import React, {Component} from 'react';
-import {Route, Switch, Link} from 'react-router-dom';
-import {Container, Menu} from 'semantic-ui-react';
-import ContactListPage from './pages/contact-list-page';
-import ContactFormPage from './pages/contact-form-page';
+import {Route, Switch} from 'react-router-dom';
+import Home from './pages/home';
 
 class App extends Component {
+
   render() {
     return (
-      <Container>
-        <Menu>
-          <Menu.Item as={Link} to="/">
-            Contacts list
-          </Menu.Item>
-          <Menu.Item as={Link} to="/contacts/new">
-            Contacts list
-          </Menu.Item>
-        </Menu>
+      <div className="pusher">
         <Switch>
-          <Route exact path="/" component={ContactListPage}/>
-          <Route path="/contacts/new" component={ContactFormPage}/>
-          <Route path="/contacts/edit:_id" component={ContactFormPage}/>
+          <Route exact path="/" component={Home}/>
+          {/*<Route path="/contacts/edit:_id" component={ContactFormPage}/>*/}
         </Switch>
-      </Container>
+      </div>
     )
   }
 }
