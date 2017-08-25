@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import {Menu, Container, Button, Icon, Transition} from 'semantic-ui-react';
 import {Link} from 'react-router-dom';
+import './menu.css';
 
 const menuItems = [
   {url: '/', text: 'Home'},

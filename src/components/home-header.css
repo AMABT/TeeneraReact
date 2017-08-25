@@ -1,21 +1,9 @@
-.hidden.menu {
-  display: none;
-}
-
 .masthead.ui.segment.vertical {
   min-height: 700px;
   height: 100vh;
   padding: 1em 0em;
   background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url(../images/dream-big.jpg) center;
   background-size: cover;
-}
-
-.masthead .logo.item img {
-  margin-right: 1em;
-}
-
-.masthead.segment .ui.menu .ui.button {
-  margin-left: 0.5em;
 }
 
 .masthead .grid.middle {
@@ -34,24 +22,7 @@
   margin-bottom: 1em;
 }
 
-.secondary.menu .toc.item {
-  display: none;
-}
-
 @media only screen and (max-width: 700px) {
-  .ui.fixed.menu {
-    display: none !important;
-  }
-
-  .secondary.default-menu.menu .item,
-  .secondary.default-menu.menu .menu {
-    display: none;
-  }
-
-  .secondary.menu .toc.item {
-    display: block;
-  }
-
   .masthead.segment {
     min-height: 250px;
   }

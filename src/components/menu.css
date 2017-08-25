@@ -1,0 +1,30 @@
+.hidden.menu {
+  display: none;
+}
+
+.logo.item img {
+  margin-right: 1em;
+}
+
+.ui.menu.secondary.default-menu .ui.button {
+  margin-left: 0.5em;
+}
+
+.ui.menu.secondary.default-menu .toc.item {
+  display: none;
+}
+
+@media only screen and (max-width: 700px) {
+  .ui.fixed.menu {
+    display: none !important;
+  }
+
+  .ui.menu.secondary.default-menu .item,
+  .ui.menu.secondary.default-menu .menu {
+    display: none;
+  }
+
+  .ui.secondary.menu.default-menu .toc.item {
+    display: block;
+  }
+}
