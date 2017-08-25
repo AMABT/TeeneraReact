@@ -10,7 +10,7 @@ const menuItems = [
 
 export const DefaultMenu = () => (
   <Container>
-    <Menu className="large secondary inverted pointing">
+    <Menu size="large" secondary inverted className="default-menu">
       <Menu.Item className="toc">
         <Icon name="sidebar"></Icon>
       </Menu.Item>

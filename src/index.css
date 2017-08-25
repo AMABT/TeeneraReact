@@ -8,10 +8,16 @@ body {
   display: none;
 }
 
-.masthead.segment {
+.masthead.ui.segment {
   min-height: 700px;
   height: 100vh;
   padding: 1em 0em;
+  background: linear-gradient(
+    rgba(0, 0, 0, 0.3),
+    rgba(0, 0, 0, 0.3)
+  ), url(./images/dream-big.jpg);
+  background-size: cover;
+  background-position: center;
 }
 
 .masthead .logo.item img {
@@ -35,6 +41,7 @@ body {
 .masthead h2 {
   font-size: 1.7em;
   font-weight: normal;
+  margin-bottom: 1em;
 }
 
 .ui.vertical.stripe {
@@ -80,7 +87,7 @@ body {
   padding: 5em 0em;
 }
 
-.secondary.pointing.menu .toc.item {
+.secondary.menu .toc.item {
   display: none;
 }
 
@@ -89,17 +96,17 @@ body {
     display: none !important;
   }
 
-  .secondary.pointing.menu .item,
-  .secondary.pointing.menu .menu {
+  .secondary.default-menu.menu .item,
+  .secondary.default-menu.menu .menu {
     display: none;
   }
 
-  .secondary.pointing.menu .toc.item {
+  .secondary.menu .toc.item {
     display: block;
   }
 
   .masthead.segment {
-    min-height: 350px;
+    min-height: 250px;
   }
 
   .masthead h1.ui.header {

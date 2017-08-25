@@ -1,5 +1,7 @@
 import React, {Component} from 'react';
 import {Container, Segment, Button, Grid, Header, Image} from 'semantic-ui-react';
+import Nan from '../images/nan.jpg';
+import WhiteImage from '../images/white-image.png';
 
 const aboutUsContent = [
   {
@@ -27,7 +29,7 @@ export default class HomeContent extends Component {
             <Grid.Row>
               <Grid.Column width="eight">{aboutUsContent}</Grid.Column>
               <Grid.Column width="six" floated="right">
-                <Image size="large" bordered shape="rounded" src="assets/images/wireframe/white-image.png"/>
+                <Image size="large" bordered shape="rounded" src={WhiteImage}/>
               </Grid.Column>
             </Grid.Row>
             <Grid.Row>
@@ -47,7 +49,7 @@ export default class HomeContent extends Component {
               <Grid.Column>
                 <h3>"I shouldn't have gone with their competitor."</h3>
                 <p>
-                  <Image src="assets/images/avatar/nan.jpg" avatar/>
+                  <Image src={Nan} avatar/>
                   <b>Nan</b>
                   Chief Fun Officer Acme Toys
                 </p>
