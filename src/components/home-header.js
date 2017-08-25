@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import {Segment, Button, Icon, Header, Visibility, Grid} from 'semantic-ui-react';
-import {DefaultMenu, FollowingMenu} from '../components/header-menu';
+import {DefaultMenu, FollowingMenu} from './menu';
+import './home-header.css';
 
 export default class HomeHeader extends Component {
 

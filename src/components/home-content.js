@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import {Container, Segment, Button, Grid, Header, Image} from 'semantic-ui-react';
 import Nan from '../images/nan.jpg';
 import WhiteImage from '../images/white-image.png';
+import './home-content.css';
 
 const aboutUsContent = [
   {
