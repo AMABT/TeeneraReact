@@ -14,7 +14,7 @@
   margin-right: 1em;
 }
 
-.masthead .ui.menu .ui.button {
+.masthead.segment .ui.menu .ui.button {
   margin-left: 0.5em;
 }
 
