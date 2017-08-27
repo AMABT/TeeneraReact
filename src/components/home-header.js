@@ -5,10 +5,10 @@ import './home-header.css';
 
 export default class HomeHeader extends Component {
 
-  state = {followingVisible: false};
+  state = {followingVisible: false}
 
-  showFollowing = () => this.setState({followingVisible: true});
-  hideFollowing = () => this.setState({followingVisible: false});
+  showFollowing = () => this.setState({followingVisible: true})
+  hideFollowing = () => this.setState({followingVisible: false})
 
   render() {
     return (

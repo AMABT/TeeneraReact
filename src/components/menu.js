@@ -7,7 +7,7 @@ const menuItems = [
   {url: '/', text: 'Home'},
   {url: '/', text: 'Home'},
   {url: '/', text: 'Home'},
-].map((item, index) => (<Menu.Item as={Link} to={item.url} key={index}>{item.text}</Menu.Item>));
+].map((item, index) => (<Menu.Item as={Link} to={item.url} key={index}>{item.text}</Menu.Item>))
 
 export const DefaultMenu = () => (
   <Container>
@@ -22,7 +22,7 @@ export const DefaultMenu = () => (
       </Menu.Item>
     </Menu>
   </Container>
-);
+)
 
 export class FollowingMenu extends Component {
 
