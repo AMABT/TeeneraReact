@@ -1,6 +1,8 @@
 import React, {Component} from 'react';
 import {Menu, Container, Button, Icon, Transition} from 'semantic-ui-react';
 import {Link} from 'react-router-dom';
+import {connect} from 'react-redux';
+import * as actions from '../actions';
 import './menu.css';
 
 const menuItems = [
@@ -9,20 +11,39 @@ const menuItems = [
   {url: '/', text: 'Home'},
 ].map((item, index) => (<Menu.Item as={Link} to={item.url} key={index}>{item.text}</Menu.Item>))
 
-export const DefaultMenu = () => (
-  <Container>
-    <Menu size="large" secondary inverted className="default-menu">
-      <Menu.Item className="toc">
-        <Icon name="sidebar"></Icon>
-      </Menu.Item>
-      {menuItems}
-      <Menu.Item className="right">
-        <Button inverted>Login</Button>
-        <Button inverted>Sign Up</Button>
-      </Menu.Item>
-    </Menu>
-  </Container>
-)
+class Default extends Component {
+
+  render() {
+
+    const {toggleLogin, loginVisible} = this.props
+
+    return (
+      <Container>
+        <Menu size="large" secondary inverted className="default-menu">
+          <Menu.Item className="toc">
+            <Icon name="sidebar"></Icon>
+          </Menu.Item>
+          {menuItems}
+          <Menu.Item className="right">
+            <Button inverted
+                    onClick={toggleLogin}
+                    active={loginVisible}>Login</Button>
+            <Button inverted>Sign Up</Button>
+          </Menu.Item>
+        </Menu>
+      </Container>
+    )
+  }
+}
+
+export const DefaultMenu = connect(
+  state => {
+    return {
+      loginVisible: state.toggleLogin.visible
+    }
+  },
+  actions
+)(Default);
 
 export class FollowingMenu extends Component {
 

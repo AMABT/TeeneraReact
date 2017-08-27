@@ -1,9 +1,11 @@
-import React, {Component} from 'react';
-import {Segment, Button, Icon, Header, Visibility, Grid} from 'semantic-ui-react';
-import {DefaultMenu, FollowingMenu} from './menu';
-import './home-header.css';
+import React, {Component} from 'react'
+import {Segment, Button, Icon, Header, Visibility, Grid} from 'semantic-ui-react'
+import {DefaultMenu, FollowingMenu} from './menu'
+import {connect} from 'react-redux'
+import LoginForm from './login-form'
+import './home-header.css'
 
-export default class HomeHeader extends Component {
+class HomeHeader extends Component {
 
   state = {followingVisible: false}
 
@@ -11,6 +13,9 @@ export default class HomeHeader extends Component {
   hideFollowing = () => this.setState({followingVisible: false})
 
   render() {
+
+    const {loginVisible} = this.props
+
     return (
       <Visibility
         once={false}
@@ -21,12 +26,15 @@ export default class HomeHeader extends Component {
           <DefaultMenu/>
           <Grid verticalAlign="middle">
             <Grid.Column>
-              <Header as="h1" inverted>Imagine-a-Company</Header>
-              <h2>Do whatever you want when you want to.</h2>
-              <Button as="div" size="huge" primary>
-                Get Started
-                <Icon name="arrow right"/>
-              </Button>
+              <div hidden={loginVisible}>
+                <Header as="h1" inverted>Imagine-a-Company</Header>
+                <h2>Do whatever you want when you want to.</h2>
+                <Button as="div" size="huge" primary>
+                  Get Started
+                  <Icon name="arrow right"/>
+                </Button>
+              </div>
+              <LoginForm visible={loginVisible}/>
             </Grid.Column>
           </Grid>
         </Segment>
@@ -34,3 +42,9 @@ export default class HomeHeader extends Component {
     )
   }
 }
+
+export default connect(state => {
+  return {
+    loginVisible: state.toggleLogin.visible
+  }
+})(HomeHeader)
