@@ -15,7 +15,9 @@ class Default extends Component {
 
   render() {
 
-    const {toggleLogin, loginVisible} = this.props
+    const {homeHeaderContent, contentVisible} = this.props
+    const loginParam = contentVisible !== 'LOGIN' ? 'LOGIN' : null;
+    const signupParam = contentVisible !== 'SIGNUP' ? 'SIGNUP' : null;
 
     return (
       <Container>
@@ -26,9 +28,11 @@ class Default extends Component {
           {menuItems}
           <Menu.Item className="right">
             <Button inverted
-                    onClick={toggleLogin}
-                    active={loginVisible}>Login</Button>
-            <Button inverted>Sign Up</Button>
+                    onClick={() => homeHeaderContent(loginParam)}
+                    active={contentVisible === 'LOGIN'}>Login</Button>
+            <Button inverted
+                    onClick={() => homeHeaderContent(signupParam)}
+                    active={contentVisible === 'SIGNUP'}>Sign Up</Button>
           </Menu.Item>
         </Menu>
       </Container>
@@ -39,7 +43,7 @@ class Default extends Component {
 export const DefaultMenu = connect(
   state => {
     return {
-      loginVisible: state.toggleLogin.visible
+      contentVisible: state.toggleHomeHeaderContent.contentVisible
     }
   },
   actions

@@ -5,16 +5,15 @@ import {connect} from 'react-redux'
 import LoginForm from './login-form'
 import './home-header.css'
 
-class HomeHeader extends Component {
+export default class HomeHeader extends Component {
 
+  // fixed menu
   state = {followingVisible: false}
 
   showFollowing = () => this.setState({followingVisible: true})
   hideFollowing = () => this.setState({followingVisible: false})
 
   render() {
-
-    const {loginVisible} = this.props
 
     return (
       <Visibility
@@ -24,18 +23,8 @@ class HomeHeader extends Component {
         <FollowingMenu visible={this.state.followingVisible}/>
         <Segment inverted vertical textAlign="center" className="masthead">
           <DefaultMenu/>
-          <Grid verticalAlign="middle">
-            <Grid.Column>
-              <div hidden={loginVisible}>
-                <Header as="h1" inverted>Imagine-a-Company</Header>
-                <h2>Do whatever you want when you want to.</h2>
-                <Button as="div" size="huge" primary>
-                  Get Started
-                  <Icon name="arrow right"/>
-                </Button>
-              </div>
-              <LoginForm visible={loginVisible}/>
-            </Grid.Column>
+          <Grid verticalAlign="middle" textAlign="center">
+            <HomeHeaderContent/>
           </Grid>
         </Segment>
       </Visibility>
@@ -43,8 +32,47 @@ class HomeHeader extends Component {
   }
 }
 
-export default connect(state => {
-  return {
-    loginVisible: state.toggleLogin.visible
+class HomeHeaderContentComponent extends Component {
+
+  render() {
+
+    const {contentVisible} = this.props
+
+    switch (contentVisible) {
+      case 'SIGNUP': {
+        return (<div></div>)
+      }
+      case 'LOGIN': {
+        return (
+          <Grid.Column style={{maxWidth: 400}}>
+            <LoginForm/>
+          </Grid.Column>
+        )
+      }
+      default: {
+        return (
+          <Grid.Column>
+            <HomeHeaderBanner/>
+          </Grid.Column>
+        )
+      }
+    }
   }
-})(HomeHeader)
+}
+
+const HomeHeaderContent = connect(state => {
+  return {
+    contentVisible: state.toggleHomeHeaderContent.contentVisible
+  }
+})(HomeHeaderContentComponent)
+
+const HomeHeaderBanner = () => (
+  <div className="banner-home-header">
+    <Header as="h1" inverted>Imagine-a-Company</Header>
+    <h2>Do whatever you want when you want to.</h2>
+    <Button as="div" size="huge" primary>
+      Get Started
+      <Icon name="arrow right"/>
+    </Button>
+  </div>
+)
