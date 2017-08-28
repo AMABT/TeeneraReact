@@ -3,6 +3,7 @@ import {Segment, Button, Icon, Header, Visibility, Grid} from 'semantic-ui-react
 import {DefaultMenu, FollowingMenu} from './menu'
 import {connect} from 'react-redux'
 import LoginForm from './login-form'
+import SignupForm from './signup-form'
 import './home-header.css'
 
 export default class HomeHeader extends Component {
@@ -32,6 +33,10 @@ export default class HomeHeader extends Component {
   }
 }
 
+const formContainerStyle = {
+  maxWidth: 400
+}
+
 class HomeHeaderContentComponent extends Component {
 
   render() {
@@ -40,11 +45,15 @@ class HomeHeaderContentComponent extends Component {
 
     switch (contentVisible) {
       case 'SIGNUP': {
-        return (<div></div>)
+        return (
+          <Grid.Column style={formContainerStyle}>
+            <SignupForm/>
+          </Grid.Column>
+        )
       }
       case 'LOGIN': {
         return (
-          <Grid.Column style={{maxWidth: 400}}>
+          <Grid.Column style={formContainerStyle}>
             <LoginForm/>
           </Grid.Column>
         )
