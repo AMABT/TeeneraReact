@@ -43,7 +43,7 @@ class Default extends Component {
 export const DefaultMenu = connect(
   state => {
     return {
-      contentVisible: state.toggleHomeHeaderContent.contentVisible
+      contentVisible: state.homeContent.contentVisible
     }
   },
   actions

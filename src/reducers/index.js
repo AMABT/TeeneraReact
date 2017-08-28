@@ -1,22 +1,10 @@
 import {combineReducers} from 'redux';
-
-function toggleHomeHeaderContent(state = {}, action = null) {
-
-  switch (action.type) {
-    case 'HOME_HEADER_SHOW_LOGIN': {
-      return {...state, contentVisible: 'LOGIN'}
-    }
-    case 'HOME_HEADER_SHOW_SIGNUP': {
-      return {...state, contentVisible: 'SIGNUP'}
-    }
-    default: {
-      return {...state, contentVisible: 'BANNER'}
-    }
-  }
-}
+import {toggleHomeHeaderContent} from "./homepage";
+import {userActions} from "./user";
 
 const rootReducer = combineReducers({
-  toggleHomeHeaderContent
+  homeContent: toggleHomeHeaderContent,
+  users: userActions
 })
 
 export default rootReducer

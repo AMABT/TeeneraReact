@@ -1,8 +1,10 @@
 import React, {Component} from 'react'
+import {connect} from 'react-redux'
 import {Header, Image, Form, Button} from 'semantic-ui-react'
 import Logo from '../images/logo.svg'
+import * as actions from '../actions/user'
 
-export default class Signup extends Component {
+class SignupComponent extends Component {
 
   formValues = {
     email: null,
@@ -43,24 +45,27 @@ export default class Signup extends Component {
 
   validatePasswords() {
     const {password, confirmPassword} = this.formValues
-    let confirmError = this.formErrors.confirmPassword
 
     if (!confirmPassword) {
-      confirmError = false
+      this.formErrors.confirmPassword = false
       return
     }
 
     const hasError = password !== confirmPassword;
-    if (confirmError === hasError) {
+    if (this.formErrors.confirmPassword === hasError) {
       return
     }
 
-    confirmError = hasError
+    this.formErrors.confirmPassword = hasError
     this.forceUpdate()
   }
 
   handleSubmit() {
-    console.log(this.formValues)
+
+    const {createUser} = this.props
+    const {email, password} = this.formValues
+
+    createUser(email, password)
   }
 
   render() {
@@ -98,3 +103,7 @@ export default class Signup extends Component {
     )
   }
 }
+
+const Signup = connect(null, actions)(SignupComponent)
+
+export default Signup

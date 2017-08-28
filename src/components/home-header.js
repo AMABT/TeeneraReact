@@ -71,7 +71,7 @@ class HomeHeaderContentComponent extends Component {
 
 const HomeHeaderContent = connect(state => {
   return {
-    contentVisible: state.toggleHomeHeaderContent.contentVisible
+    contentVisible: state.homeContent.contentVisible
   }
 })(HomeHeaderContentComponent)
 
