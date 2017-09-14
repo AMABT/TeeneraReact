@@ -46,6 +46,4 @@ class LoginForm extends Component {
   }
 }
 
-const Login = connect(null, userActions)(LoginForm)
-
-export default Login
+export default connect(null, userActions)(LoginForm)
