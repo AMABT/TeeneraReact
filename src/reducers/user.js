@@ -4,7 +4,7 @@ export function userActions(state = {}, action = null) {
       return {...state, userEmail: action.payload.user.email}
     }
     case 'USER_FETCHED': {
-      return {...state, user: action.payload.user}
+      return {...state, user: action.payload.user, login: true}
     }
     default: {
       return state

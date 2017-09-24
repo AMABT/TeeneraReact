@@ -7,8 +7,10 @@ export function toggleHomeHeaderContent(state = {}, action = null) {
     case 'HOME_HEADER_SHOW_SIGNUP': {
       return {...state, contentVisible: 'SIGNUP'}
     }
-    default: {
+    case 'HOME_HEADER_SHOW_BANNER':
       return {...state, contentVisible: 'BANNER'}
+    default: {
+      return state
     }
   }
 }

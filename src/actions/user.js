@@ -19,6 +19,9 @@ export function createUser(email, password) {
 
 export function fetchUser(email, password) {
   return (dispatch) => {
+    dispatch({
+      type: 'USER_FETCHING'
+    })
     userService
       .find({email, password})
       .then(response => {

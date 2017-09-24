@@ -1,5 +1,6 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
+import {Redirect} from 'react-router-dom'
 import {Header, Image, Form, Button} from 'semantic-ui-react'
 import * as userActions from '../actions/user'
 import Logo from '../images/logo.svg'
@@ -24,6 +25,10 @@ class LoginForm extends Component {
 
   render() {
 
+    if (this.props.loginState) {
+      return (<Redirect to={{pathname: '/dashboard'}}/>)
+    }
+
     return (
       <div className="login-form">
         <Header as="h2" image inverted>
@@ -46,4 +51,8 @@ class LoginForm extends Component {
   }
 }
 
-export default connect(null, userActions)(LoginForm)
+const mapState = (state) => ({
+  loginState: state.users.login
+})
+
+export default connect(mapState, userActions)(LoginForm)
