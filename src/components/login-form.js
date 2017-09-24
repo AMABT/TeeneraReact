@@ -23,6 +23,11 @@ class LoginForm extends Component {
     fetchUser(email, password)
   }
 
+  componentWillMount() {
+    const {checkUserIsLogged} = this.props;
+    checkUserIsLogged();
+  }
+
   render() {
 
     if (this.props.loginState) {
