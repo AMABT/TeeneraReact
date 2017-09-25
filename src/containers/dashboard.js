@@ -2,10 +2,9 @@ import React from 'react'
 import {connect} from 'react-redux'
 import {Redirect, Switch, Route} from 'react-router-dom'
 import DashMenu from '../components/dashboard-menu'
-import DashSidebar from '../components/dashboard-sidebar'
 import Logout from '../components/logout';
 import DashboardFeed from '../components/dashboard-feed';
-import {Container} from 'semantic-ui-react'
+import {Container, Divider} from 'semantic-ui-react'
 
 const Dashboard = (props) => {
 
@@ -17,13 +16,11 @@ const Dashboard = (props) => {
     <div className="dashboard-page">
       <DashMenu/>
       <Container>
-        <DashSidebar/>
-        <div className="dashboard-content">
-          <Switch>
-            <Route path="/dashboard/logout" component={Logout}/>
-            <Route component={DashboardFeed}/>
-          </Switch>
-        </div>
+        <Divider/>
+        <Switch>
+          <Route path="/dashboard/logout" component={Logout}/>
+          <Route component={DashboardFeed}/>
+        </Switch>
       </Container>
     </div>
   )
