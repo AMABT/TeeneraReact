@@ -9,9 +9,8 @@ class App extends Component {
     return (
       <div className="pusher">
         <Switch>
-          <Route exact path="/" component={Home}/>
           <Route exact path="/dashboard" component={Dashboard}/>
-          {/*<Route path="/contacts/edit:_id" component={ContactFormPage}/>*/}
+          <Route path="/" component={Home}/>
         </Switch>
       </div>
     )

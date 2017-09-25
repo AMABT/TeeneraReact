@@ -1,46 +1,30 @@
 import React from 'react';
+import {NavLink} from 'react-router-dom'
 import {Menu, Container, Button, Icon, Transition} from 'semantic-ui-react';
-import {Link} from 'react-router-dom';
-import {connect} from 'react-redux';
-import * as actions from '../actions';
 import './menu.css';
 
 const menuItems = [
   {url: '/', text: 'Home'},
-  {url: '/', text: 'Home'},
-  {url: '/', text: 'Home'},
-].map((item, index) => (<Menu.Item as={Link} to={item.url} key={index}>{item.text}</Menu.Item>))
+  {url: '/about', text: 'About'},
+  {url: '/contact', text: 'Contact'},
+].map((item, index) => (<Menu.Item as={NavLink} to={item.url} key={index}>{item.text}</Menu.Item>))
 
-const Default = props => {
-
-  const {homeHeaderContent, contentVisible} = props
-  const loginParam = contentVisible !== 'LOGIN' ? 'LOGIN' : null;
-  const signupParam = contentVisible !== 'SIGNUP' ? 'SIGNUP' : null;
-
+export const DefaultMenu = () => {
   return (
     <Container>
       <Menu size="large" secondary inverted className="default-menu">
         <Menu.Item className="toc">
-          <Icon name="sidebar"></Icon>
+          <Icon name="sidebar"/>
         </Menu.Item>
         {menuItems}
         <Menu.Item className="right">
-          <Button inverted
-                  onClick={() => homeHeaderContent(loginParam)}
-                  active={contentVisible === 'LOGIN'}>Login</Button>
-          <Button inverted
-                  onClick={() => homeHeaderContent(signupParam)}
-                  active={contentVisible === 'SIGNUP'}>Sign Up</Button>
+          <Button inverted as={NavLink} to="/login">Login</Button>
+          <Button inverted as={NavLink} to="/signup">Sign Up</Button>
         </Menu.Item>
       </Menu>
     </Container>
   )
 }
-
-export const DefaultMenu = connect(
-  state => ({contentVisible: state.homeContent.contentVisible}),
-  actions
-)(Default);
 
 export const FollowingMenu = props => {
 

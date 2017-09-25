@@ -1,10 +1,14 @@
 import React, {Component} from 'react'
+import {Route, Switch} from 'react-router-dom';
 import {Segment, Button, Icon, Header, Visibility, Grid} from 'semantic-ui-react'
 import {DefaultMenu, FollowingMenu} from './menu'
-import {connect} from 'react-redux'
 import LoginForm from './login-form'
 import SignupForm from './signup-form'
 import './home-header.css'
+
+const formContainerStyle = {
+  maxWidth: 400
+}
 
 export default class HomeHeader extends Component {
 
@@ -17,63 +21,34 @@ export default class HomeHeader extends Component {
   render() {
 
     return (
-      <Visibility
-        once={false}
-        onOffScreen={this.showFollowing.bind(this)}
-        onOnScreen={this.hideFollowing.bind(this)}>
+      <Visibility once={false} onOffScreen={this.showFollowing.bind(this)} onOnScreen={this.hideFollowing.bind(this)}>
         <FollowingMenu visible={this.state.followingVisible}/>
         <Segment inverted vertical textAlign="center" className="masthead">
           <DefaultMenu/>
           <Grid verticalAlign="middle" textAlign="center">
-            <HomeHeaderContent/>
+            <Switch>
+              <Route exact path="/login">
+                <Grid.Column style={formContainerStyle}>
+                  <Route component={LoginForm}/>
+                </Grid.Column>
+              </Route>
+              <Route exact path="/signup">
+                <Grid.Column style={formContainerStyle}>
+                  <Route component={SignupForm}/>
+                </Grid.Column>
+              </Route>
+              <Route>
+                <Grid.Column>
+                  <Route component={HomeHeaderBanner}/>
+                </Grid.Column>
+              </Route>
+            </Switch>
           </Grid>
         </Segment>
       </Visibility>
     )
   }
 }
-
-const formContainerStyle = {
-  maxWidth: 400
-}
-
-class HomeHeaderContentComponent extends Component {
-
-  render() {
-
-    const {contentVisible} = this.props
-
-    switch (contentVisible) {
-      case 'SIGNUP': {
-        return (
-          <Grid.Column style={formContainerStyle}>
-            <SignupForm/>
-          </Grid.Column>
-        )
-      }
-      case 'LOGIN': {
-        return (
-          <Grid.Column style={formContainerStyle}>
-            <LoginForm/>
-          </Grid.Column>
-        )
-      }
-      default: {
-        return (
-          <Grid.Column>
-            <HomeHeaderBanner/>
-          </Grid.Column>
-        )
-      }
-    }
-  }
-}
-
-const HomeHeaderContent = connect(state => {
-  return {
-    contentVisible: state.homeContent.contentVisible
-  }
-})(HomeHeaderContentComponent)
 
 const HomeHeaderBanner = () => (
   <div className="banner-home-header">
