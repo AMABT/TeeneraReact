@@ -10,7 +10,6 @@ export function createUser(email, password) {
         password
       })
       .then(user => {
-        console.log(user);
         dispatch({
           type: 'USER_CREATED',
           payload: {user}
