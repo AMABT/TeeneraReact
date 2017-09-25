@@ -48,3 +48,10 @@ export function checkUserIsLogged() {
     type: 'USER_NOT_LOGGED'
   }
 }
+
+export function logoutUser() {
+  localStorage.clear();
+  return {
+    type: 'USER_LOGGED_OUT'
+  }
+}

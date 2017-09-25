@@ -6,6 +6,9 @@ export function userActions(state = {}, action = null) {
     case 'USER_FETCHED': {
       return {...state, user: action.payload.user, login: true}
     }
+    case 'USER_LOGGED_OUT': {
+      return {...state, user: null, login: false}
+    }
     default: {
       return state
     }
