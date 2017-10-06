@@ -18,7 +18,7 @@ class Login extends Component {
 
   render() {
     return (
-      <Firewall to={{pathname: '/dashboard'}} condition={this.props.loginState}>
+      <Firewall pathname='/dashboard' condition={this.props.loginState}>
         <LoginForm handleSubmit={this.handleSubmit.bind(this)}/>
       </Firewall>
     )
