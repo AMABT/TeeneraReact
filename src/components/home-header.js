@@ -2,8 +2,9 @@ import React, {Component} from 'react'
 import {Route, Switch} from 'react-router-dom';
 import {Segment, Button, Icon, Header, Visibility, Grid} from 'semantic-ui-react'
 import {DefaultMenu, FollowingMenu} from './menu'
-import LoginForm from './login-form'
+import LoginForm from '../containers/login'
 import SignupForm from './signup-form'
+// import styles from './home-header.css'
 import './home-header.css'
 
 const formContainerStyle = {
