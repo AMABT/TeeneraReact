@@ -19,20 +19,17 @@ export function createUser(email, password) {
 }
 
 export function fetchUser(email, password) {
-  return (dispatch) => {
+  return async (dispatch) => {
     dispatch({
       type: 'USER_FETCHING'
     })
-    userService
-      .find({email, password})
-      .then(response => {
-        const user = response.data[0];
-        localStorage.setItem(localStorageUser, JSON.stringify(user));
-        dispatch({
-          type: 'USER_FETCHED',
-          payload: {user}
-        })
-      })
+    const response = await userService.find({email, password})
+    const user = response.data[0]
+    localStorage.setItem(localStorageUser, JSON.stringify(user))
+    dispatch({
+      type: 'USER_FETCHED',
+      payload: {user}
+    })
   }
 }
 
