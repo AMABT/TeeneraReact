@@ -3,7 +3,7 @@ import {Route, Switch} from 'react-router-dom';
 import {Segment, Button, Icon, Header, Visibility, Grid} from 'semantic-ui-react'
 import {DefaultMenu, FollowingMenu} from './menu'
 import LoginForm from '../containers/login'
-import SignupForm from './signup-form'
+import SignupForm from '../containers/signup'
 // import styles from './home-header.css'
 import './home-header.css'
 
