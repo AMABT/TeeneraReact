@@ -9,6 +9,9 @@ const menuItems = [
   {url: '/contact', text: 'Contact'},
 ].map((item, index) => (<Menu.Item as={NavLink} to={item.url} key={index}>{item.text}</Menu.Item>))
 
+const loginProps = {as: NavLink, to: '/login'}
+const signupProps = {as: NavLink, to: '/signup'}
+
 export const DefaultMenu = () => {
   return (
     <Container>
@@ -18,8 +21,8 @@ export const DefaultMenu = () => {
         </Menu.Item>
         {menuItems}
         <Menu.Item className="right">
-          <Button inverted as={NavLink} to="/login">Login</Button>
-          <Button inverted as={NavLink} to="/signup">Sign Up</Button>
+          <Button inverted {...loginProps}>Login</Button>
+          <Button inverted {...signupProps}>Sign Up</Button>
         </Menu.Item>
       </Menu>
     </Container>
@@ -36,8 +39,12 @@ export const FollowingMenu = props => {
         <Container>
           {menuItems}
           <div className="right menu">
-            <Menu.Item><Button>Log in</Button></Menu.Item>
-            <Menu.Item><Button primary>Sign up</Button></Menu.Item>
+            <Menu.Item>
+              <Button {...loginProps}>Log in</Button>
+            </Menu.Item>
+            <Menu.Item>
+              <Button primary {...signupProps}>Sign up</Button>
+            </Menu.Item>
           </div>
         </Container>
       </Menu>

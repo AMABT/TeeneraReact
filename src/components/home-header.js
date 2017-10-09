@@ -22,7 +22,7 @@ export default class HomeHeader extends Component {
   render() {
 
     return (
-      <Visibility once={false} onOffScreen={this.showFollowing.bind(this)} onOnScreen={this.hideFollowing.bind(this)}>
+      <Visibility once={false} onOffScreen={this.showFollowing} onOnScreen={this.hideFollowing}>
         <FollowingMenu visible={this.state.followingVisible}/>
         <Segment inverted vertical textAlign="center" className="masthead">
           <DefaultMenu/>

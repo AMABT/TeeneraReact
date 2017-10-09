@@ -8,28 +8,29 @@ export default class Signup extends Component {
     emailError: false,
     passwordError: false
   }
+
   formValues = {
     password: null,
     confirmPassword: null
   }
 
-  updateFormValues(field, value) {
+  updateFormValues = (field, value) => {
     this.formValues[field] = value
   }
 
-  validatePasswords() {
+  validatePasswords = () => {
     const {password, confirmPassword} = this.formValues
     const passwordError = confirmPassword && password !== confirmPassword
     this.setState({passwordError})
   }
 
-  validateEmail(event) {
+  validateEmail = event => {
     const val = event.target.value
     const emailError = val.indexOf('@') < 0 || val.indexOf('.') < 0
     this.setState({emailError})
   }
 
-  handleSubmit(event) {
+  handleSubmit = event => {
     const elements = event.target.elements
     const {onSubmit} = this.props
     onSubmit({
@@ -47,11 +48,11 @@ export default class Signup extends Component {
             Signup in our website
           </div>
         </Header>
-        <Form size="large" onSubmit={this.handleSubmit.bind(this)}>
+        <Form size="large" onSubmit={this.handleSubmit}>
           <Form.Input type="email" placeholder="E-mail address" name="email"
                       icon="user" iconPosition="left"
                       error={this.state.emailError}
-                      onChange={this.validateEmail.bind(this)}/>
+                      onChange={this.validateEmail}/>
           <Form.Input type="password" placeholder="Password" name="password"
                       icon="lock" iconPosition="left"
                       onChange={(event) => {

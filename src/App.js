@@ -1,6 +1,6 @@
-import React, {Component} from 'react';
-import {Route, Switch} from 'react-router-dom';
-import Home from './containers/home';
+import React, {Component} from 'react'
+import {Route, Switch} from 'react-router-dom'
+import Home from './components/home'
 import Dashboard from './containers/dashboard'
 
 class App extends Component {

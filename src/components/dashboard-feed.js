@@ -4,14 +4,14 @@ import DashSidebar from '../components/dashboard-sidebar'
 
 export default () => (
   <Grid>
-    <Grid.Column wide width="four">
+    <Grid.Column width="four">
       <DashSidebar items={[
         {'/dashboard/experiences': 'Experience'},
         {'/dashboard/profile': 'Profile'},
         {'/dashboard/settings': 'Settings'},
       ]}/>
     </Grid.Column>
-    <Grid.Column wide width="four" className="dashboard-content">
+    <Grid.Column width="four" className="dashboard-content">
       <Grid.Row>
         <Header as="h1">
           Your feed
