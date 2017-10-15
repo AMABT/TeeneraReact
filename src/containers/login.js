@@ -7,8 +7,8 @@ import Firewall from '../components/firewall'
 class Login extends Component {
 
   handleSubmit(email, password) {
-    const {fetchUser} = this.props
-    fetchUser(email, password)
+    const {loginUser} = this.props
+    loginUser(email, password)
   }
 
   componentWillMount() {

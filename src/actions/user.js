@@ -1,4 +1,4 @@
-import {userService} from "../feathers/index";
+import {userService, app} from "../feathers/index";
 
 const localStorageUser = 'user';
 
@@ -18,16 +18,17 @@ export function createUser(email, password) {
   }
 }
 
-export function fetchUser(email, password) {
+export function loginUser(email, password) {
   return async (dispatch) => {
     dispatch({
-      type: 'USER_FETCHING'
+      type: 'USER_LOGGING'
     })
-    const response = await userService.find({email, password})
-    const user = response.data[0]
+    const response = await app.authenticate({strategy: 'local', email, password})
+    // const payload = await app.passport.verifyJWT(response.accessToken)
+    const user = response.user
     localStorage.setItem(localStorageUser, JSON.stringify(user))
     dispatch({
-      type: 'USER_FETCHED',
+      type: 'USER_LOGGED',
       payload: {user}
     })
   }
@@ -37,7 +38,7 @@ export function checkUserIsLogged() {
   let user = localStorage.getItem(localStorageUser);
   if (user && (user = JSON.parse(user))) { /*eslint no-cond-assign: "off"*/
     return {
-      type: 'USER_FETCHED',
+      type: 'USER_LOGGED',
       payload: {user}
     }
   }
