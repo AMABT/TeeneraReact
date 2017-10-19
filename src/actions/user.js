@@ -3,8 +3,8 @@ import {userService, app} from '../feathers/index';
 
 const localStorageUser = 'user';
 
-export const createUser = (email, password) => {
-  return (dispatch) => {
+export const createUser = (email: string, password: string) => {
+  return (dispatch: ({ type: string, payload: {} }) => void) => {
     userService
       .create({
         email,
@@ -19,8 +19,8 @@ export const createUser = (email, password) => {
   }
 }
 
-export const loginUser = (email, password) => {
-  return async (dispatch) => {
+export const loginUser = (email: string, password: string) => {
+  return async (dispatch: ({ type: string }) => void) => {
     dispatch({
       type: 'USER_LOGGING'
     })

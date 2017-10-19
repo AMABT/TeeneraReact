@@ -4,7 +4,7 @@ import {NavLink} from 'react-router-dom'
 import {Menu} from 'semantic-ui-react'
 
 type Props = {
-  items: [{}]
+  items: Array<Object>
 }
 
 const DashboardSidebar = (props: Props) => (

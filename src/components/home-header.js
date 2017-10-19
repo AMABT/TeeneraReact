@@ -23,7 +23,11 @@ const HomeHeaderBanner = () => (
   </div>
 )
 
-export default class HomeHeader extends Component {
+type State = {
+  followingVisible: boolean
+}
+
+export default class HomeHeader extends Component<{}, State> {
 
   // fixed menu
   state = {followingVisible: false}

@@ -5,7 +5,7 @@ import {Redirect} from 'react-router-dom'
 type Props = {
   condition: boolean,
   pathname: string,
-  children: {}
+  children: any
 }
 
 const Firewall = (props: Props) => {
