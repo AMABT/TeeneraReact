@@ -1,20 +1,16 @@
-import React, {Component} from 'react'
+// @flow
+import React from 'react'
 import {Route, Switch} from 'react-router-dom'
 import Home from './components/home'
 import Dashboard from './containers/dashboard'
 
-class App extends Component {
+const App = () => (
+  <div className="pusher">
+    <Switch>
+      <Route component={Dashboard} path="/dashboard"/>
+      <Route component={Home} path="/"/>
+    </Switch>
+  </div>
+)
 
-  render() {
-    return (
-      <div className="pusher">
-        <Switch>
-          <Route path="/dashboard" component={Dashboard}/>
-          <Route path="/" component={Home}/>
-        </Switch>
-      </div>
-    )
-  }
-}
-
-export default App;
+export default App

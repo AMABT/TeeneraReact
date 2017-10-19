@@ -1,3 +1,4 @@
+// @flow
 import React from 'react';
 import {NavLink} from 'react-router-dom'
 import {Menu, Container, Button, Icon, Transition} from 'semantic-ui-react';
@@ -6,8 +7,8 @@ import './menu.css';
 const menuItems = [
   {url: '/', text: 'Home'},
   {url: '/about', text: 'About'},
-  {url: '/contact', text: 'Contact'},
-].map((item, index) => (<Menu.Item as={NavLink} to={item.url} key={index}>{item.text}</Menu.Item>))
+  {url: '/contact', text: 'Contact'}
+].map((item, index) => (<Menu.Item as={NavLink} key={index} to={item.url}>{item.text}</Menu.Item>))
 
 const loginProps = {as: NavLink, to: '/login'}
 const signupProps = {as: NavLink, to: '/signup'}
@@ -15,7 +16,7 @@ const signupProps = {as: NavLink, to: '/signup'}
 export const DefaultMenu = () => {
   return (
     <Container>
-      <Menu size="large" secondary inverted className="default-menu">
+      <Menu className="default-menu" inverted secondary size="large">
         <Menu.Item className="toc">
           <Icon name="sidebar"/>
         </Menu.Item>
@@ -29,13 +30,17 @@ export const DefaultMenu = () => {
   )
 }
 
-export const FollowingMenu = props => {
+type Props = {
+  visible: boolean
+}
+
+export const FollowingMenu = (props: Props) => {
 
   const {visible} = props;
 
   return (
-    <Transition animation="fade" visible={visible} duration={300}>
-      <Menu size="large" fixed="top">
+    <Transition animation="fade" duration={300} visible={visible}>
+      <Menu fixed="top" size="large">
         <Container>
           {menuItems}
           <div className="right menu">

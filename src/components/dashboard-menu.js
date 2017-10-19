@@ -1,3 +1,4 @@
+// @flow
 import React from 'react'
 import {NavLink} from 'react-router-dom'
 import {Menu, Container, Button} from 'semantic-ui-react';
@@ -9,11 +10,11 @@ const menuStyle = {
 const menuItems = [
   {url: '/dashboard', text: 'Dashboard'},
   {url: '/dashboard/experiences', text: 'Experiences'}
-].map((item, index) => (<Menu.Item as={NavLink} to={item.url} key={index}>{item.text}</Menu.Item>))
+].map((item, index) => (<Menu.Item as={NavLink} key={index} to={item.url}>{item.text}</Menu.Item>))
 
-export default () => (
+const DashboardMenu = () => (
   <Container>
-    <Menu size="large" secondary className="dashboard-menu" style={menuStyle}>
+    <Menu className="dashboard-menu" secondary size="large" style={menuStyle}>
       <Menu.Item header>Teenera</Menu.Item>
       {menuItems}
       <Menu.Item className="right">
@@ -22,3 +23,5 @@ export default () => (
     </Menu>
   </Container>
 )
+
+export default DashboardMenu

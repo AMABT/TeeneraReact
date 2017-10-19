@@ -1,3 +1,4 @@
+// @flow
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import * as userActions from '../actions/user'
@@ -6,20 +7,22 @@ import Firewall from '../components/firewall'
 
 class Login extends Component {
 
-  handleSubmit(email, password) {
+  componentWillMount() {
+    const {checkUserIsLogged} = this.props
+    checkUserIsLogged()
+  }
+
+  handleSubmit = (email, password) => {
     const {loginUser} = this.props
     loginUser(email, password)
   }
 
-  componentWillMount() {
-    const {checkUserIsLogged} = this.props;
-    checkUserIsLogged();
-  }
-
   render() {
+    const {loginState} = this.props
+
     return (
-      <Firewall pathname='/dashboard' condition={this.props.loginState}>
-        <LoginForm handleSubmit={this.handleSubmit.bind(this)}/>
+      <Firewall condition={loginState} pathname="/dashboard">
+        <LoginForm onSubmit={this.handleSubmit}/>
       </Firewall>
     )
   }

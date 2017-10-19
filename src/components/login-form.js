@@ -1,29 +1,50 @@
-import React from 'react'
+// @flow
+import React, {PureComponent} from 'react'
 import {Header, Image, Form, Button} from 'semantic-ui-react'
 import Logo from '../images/logo.svg'
 
-/**
- *
- * @param handleSubmit function(email, password)
- */
-export default ({handleSubmit}) => (
-  <div className="login-form">
-    <Header as="h2" image inverted>
-      <Image src={Logo}/>
-      <div className="content">
-        Login-in to your account
+type Props = {
+  onSubmit: ({
+    email: string,
+    password: string
+  }) => void
+}
+
+export default class LoginForm extends PureComponent<Props> {
+
+  handleSubmit = (event) => {
+    if (event) event.preventDefault()
+    const {elements} = event.target
+    const email = elements['email'].value
+    const password = elements['password'].value
+    const {onSubmit} = this.props
+    onSubmit({email, password})
+  }
+
+  render() {
+    return (
+      <div className="login-form">
+        <Header as="h2" image inverted>
+          <Image src={Logo}/>
+          <div className="content">
+            Login-in to your account
+          </div>
+        </Header>
+        <Form
+            onSubmit={this.handleSubmit}
+            size="large"
+        >
+          <Form.Input
+              icon="user" iconPosition="left"
+              name="email" placeholder="E-mail address"
+          />
+          <Form.Input
+              icon="lock" iconPosition="left"
+              name="password" placeholder="Password" type="password"
+          />
+          <Button color="teal" fluid size="large" type="submit">Login</Button>
+        </Form>
       </div>
-    </Header>
-    <Form size="large" onSubmit={(event) => {
-      event && event.preventDefault()
-      const {elements} = event.target
-      handleSubmit(elements['email'].value, elements['password'].value)
-    }}>
-      <Form.Input placeholder="E-mail address" name="email"
-                  icon="user" iconPosition="left"/>
-      <Form.Input type="password" placeholder="Password" name="password"
-                  icon="lock" iconPosition="left"/>
-      <Button fluid type="submit" size="large" color="teal">Login</Button>
-    </Form>
-  </div>
-)
+    )
+  }
+}

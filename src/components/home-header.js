@@ -1,3 +1,4 @@
+// @flow
 import React, {Component} from 'react'
 import {Route, Switch} from 'react-router-dom';
 import {Segment, Button, Icon, Header, Visibility, Grid} from 'semantic-ui-react'
@@ -11,22 +12,33 @@ const formContainerStyle = {
   maxWidth: 400
 }
 
+const HomeHeaderBanner = () => (
+  <div className="banner-home-header">
+    <Header as="h1" inverted>Imagine-a-Company</Header>
+    <h2>Do whatever you want when you want to.</h2>
+    <Button as="div" primary size="huge">
+      Get Started
+      <Icon name="arrow right"/>
+    </Button>
+  </div>
+)
+
 export default class HomeHeader extends Component {
 
   // fixed menu
   state = {followingVisible: false}
 
-  showFollowing = () => this.setState({followingVisible: true})
-  hideFollowing = () => this.setState({followingVisible: false})
+  handleShowFollowing = () => this.setState({followingVisible: true})
+  handleHideFollowing = () => this.setState({followingVisible: false})
 
   render() {
 
     return (
-      <Visibility once={false} onOffScreen={this.showFollowing} onOnScreen={this.hideFollowing}>
+      <Visibility onOffScreen={this.handleShowFollowing} onOnScreen={this.handleHideFollowing} once={false}>
         <FollowingMenu visible={this.state.followingVisible}/>
-        <Segment inverted vertical textAlign="center" className="masthead">
+        <Segment className="masthead" inverted textAlign="center" vertical>
           <DefaultMenu/>
-          <Grid verticalAlign="middle" textAlign="center">
+          <Grid textAlign="center" verticalAlign="middle">
             <Switch>
               <Route exact path="/login">
                 <Grid.Column style={formContainerStyle}>
@@ -50,14 +62,3 @@ export default class HomeHeader extends Component {
     )
   }
 }
-
-const HomeHeaderBanner = () => (
-  <div className="banner-home-header">
-    <Header as="h1" inverted>Imagine-a-Company</Header>
-    <h2>Do whatever you want when you want to.</h2>
-    <Button as="div" size="huge" primary>
-      Get Started
-      <Icon name="arrow right"/>
-    </Button>
-  </div>
-)

@@ -1,5 +1,6 @@
-export function userActions(state = {}, action = null) {
-  // redux reducing boilerplate - generating reducers
+// @flow
+export const userActions = (state = {}, action = null) => {
+  // @Suggestion redux reducing boilerplate - generating reducers
   switch (action.type) {
     case 'USER_CREATED': {
       return {...state, userEmail: action.payload.user.email}

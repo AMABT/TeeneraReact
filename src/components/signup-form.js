@@ -1,8 +1,16 @@
+// @flow
 import React, {Component} from 'react'
 import {Header, Image, Form, Button} from 'semantic-ui-react'
 import Logo from '../images/logo.svg'
 
-export default class Signup extends Component {
+type Props = {
+  onSubmit: ({
+    email: string,
+    password: string
+  }) => void
+}
+
+export default class Signup extends Component<Props> {
 
   state = {
     emailError: false,
@@ -24,19 +32,26 @@ export default class Signup extends Component {
     this.setState({passwordError})
   }
 
-  validateEmail = event => {
+  handleEmailChange = (event) => {
     const val = event.target.value
     const emailError = val.indexOf('@') < 0 || val.indexOf('.') < 0
     this.setState({emailError})
   }
 
-  handleSubmit = event => {
-    const elements = event.target.elements
+  handlePasswordChange = (event) => this.updateFormValues('password', event.target.value)
+
+  handleConfirmPasswordChange = (event) => {
+    this.updateFormValues('confirmPassword', event.target.value)
+    this.validatePasswords()
+  }
+
+  handleSubmit = (event) => {
+    if (event) event.preventDefault()
+    const {elements} = event.target
+    const email = elements['email'].value
+    const password = elements['password'].value
     const {onSubmit} = this.props
-    onSubmit({
-      email: elements['email'].value,
-      password: elements['password'].value
-    })
+    onSubmit({email, password})
   }
 
   render() {
@@ -48,24 +63,25 @@ export default class Signup extends Component {
             Signup in our website
           </div>
         </Header>
-        <Form size="large" onSubmit={this.handleSubmit}>
-          <Form.Input type="email" placeholder="E-mail address" name="email"
-                      icon="user" iconPosition="left"
-                      error={this.state.emailError}
-                      onChange={this.validateEmail}/>
-          <Form.Input type="password" placeholder="Password" name="password"
-                      icon="lock" iconPosition="left"
-                      onChange={(event) => {
-                        this.updateFormValues('password', event.target.value)
-                      }}/>
-          <Form.Input type="password" placeholder="Confirm password" name="confirm-password"
-                      icon="lock" iconPosition="left"
-                      error={this.state.passwordError}
-                      onChange={(event) => {
-                        this.updateFormValues('confirmPassword', event.target.value)
-                        this.validatePasswords()
-                      }}/>
-          <Button fluid type="submit" size="large" color="teal">Signup</Button>
+        <Form onSubmit={this.handleSubmit} size="large">
+          <Form.Input
+              error={this.state.emailError} icon="user" iconPosition="left"
+              name="email" onChange={this.handleEmailChange}
+              placeholder="E-mail address"
+              type="email"
+          />
+          <Form.Input
+              icon="lock" iconPosition="left" name="password"
+              onChange={this.handlePasswordChange} placeholder="Password"
+              type="password"
+          />
+          <Form.Input
+              error={this.state.passwordError} icon="lock" iconPosition="left"
+              name="confirm-password" onChange={this.handleConfirmPasswordChange}
+              placeholder="Confirm password"
+              type="password"
+          />
+          <Button color="teal" fluid size="large" type="submit">Signup</Button>
         </Form>
       </div>
     )

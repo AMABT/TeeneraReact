@@ -1,3 +1,4 @@
+// @flow
 import React from 'react'
 import {connect} from 'react-redux'
 import {Redirect, Switch, Route} from 'react-router-dom'
@@ -6,7 +7,11 @@ import Logout from '../components/logout';
 import DashboardFeed from '../components/dashboard-feed';
 import {Container, Divider} from 'semantic-ui-react'
 
-const Dashboard = (props) => {
+type Props = {
+  loginState: boolean
+}
+
+const Dashboard = (props: Props) => {
 
   if (!props.loginState) {
     return (<Redirect to={{pathname: '/login'}}/>)
@@ -18,7 +23,7 @@ const Dashboard = (props) => {
       <Container>
         <Divider/>
         <Switch>
-          <Route path="/dashboard/logout" component={Logout}/>
+          <Route component={Logout} path="/dashboard/logout"/>
           <Route component={DashboardFeed}/>
         </Switch>
       </Container>

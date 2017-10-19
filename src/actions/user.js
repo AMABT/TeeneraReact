@@ -1,8 +1,9 @@
-import {userService, app} from "../feathers/index";
+// @flow
+import {userService, app} from '../feathers/index';
 
 const localStorageUser = 'user';
 
-export function createUser(email, password) {
+export const createUser = (email, password) => {
   return (dispatch) => {
     userService
       .create({
@@ -18,7 +19,7 @@ export function createUser(email, password) {
   }
 }
 
-export function loginUser(email, password) {
+export const loginUser = (email, password) => {
   return async (dispatch) => {
     dispatch({
       type: 'USER_LOGGING'
@@ -34,7 +35,7 @@ export function loginUser(email, password) {
   }
 }
 
-export function checkUserIsLogged() {
+export const checkUserIsLogged = () => {
   let user = localStorage.getItem(localStorageUser);
   if (user && (user = JSON.parse(user))) { /*eslint no-cond-assign: "off"*/
     return {
@@ -47,7 +48,7 @@ export function checkUserIsLogged() {
   }
 }
 
-export function logoutUser() {
+export const logoutUser = () => {
   localStorage.clear();
   return {
     type: 'USER_LOGGED_OUT'

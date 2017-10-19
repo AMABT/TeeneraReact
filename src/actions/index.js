@@ -1,4 +1,5 @@
-export function homeHeaderContent(content) {
+// @flow
+export const homeHeaderContent = (content) => {
   switch (content) {
     case 'LOGIN': {
       return {

@@ -1,9 +1,10 @@
-import React, {Component} from 'react'
+// @flow
+import React, {PureComponent} from 'react'
 import {Redirect} from 'react-router-dom'
 import {connect} from 'react-redux'
 import * as userActions from '../actions/user'
 
-class Logout extends Component {
+class Logout extends PureComponent {
 
   componentWillMount() {
     const {logoutUser} = this.props;
