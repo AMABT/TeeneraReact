@@ -10,27 +10,26 @@ type Props = {
   }) => void
 }
 
-type FormInput = typeof Form.Input
+type InputValue = { value: string }
 
 export default class LoginForm extends PureComponent<Props> {
 
-  emailField: FormInput
-  passwordField: FormInput
+  email: string = ''
+  password: string = ''
 
   handleSubmit = (event: Event) => {
     if (event) event.preventDefault()
-    const email = this.emailField.value
-    const password = this.passwordField.value
+    const {email, password} = this
     const {onSubmit} = this.props
     onSubmit({email, password})
   }
 
-  refEmail = (input: FormInput) => {
-    this.emailField = input
+  handleEmailChange = (event: Event, {value}: InputValue) => {
+    this.email = value
   }
 
-  refPassword = (input: FormInput) => {
-    this.passwordField = input
+  handlePasswordChange = (event: Event, {value}: InputValue) => {
+    this.password = value
   }
 
   render() {
@@ -45,13 +44,13 @@ export default class LoginForm extends PureComponent<Props> {
         <Form onSubmit={this.handleSubmit} size="large">
           <Form.Input
               icon="user" iconPosition="left"
-              name="email" placeholder="E-mail address"
-              ref={this.refEmail}
+              name="email" onChange={this.handleEmailChange}
+              placeholder="E-mail address"
           />
           <Form.Input
               icon="lock" iconPosition="left"
-              name="password" placeholder="Password"
-              ref={this.refPassword} type="password"
+              name="password" onChange={this.handlePasswordChange}
+              placeholder="Password" type="password"
           />
           <Button color="teal" fluid size="large" type="submit">Login</Button>
         </Form>

@@ -15,13 +15,7 @@ type State = {
   passwordError: boolean | null
 }
 
-type FormInput = typeof Form.Input | { value: string }
-
-type FormFields = {
-  email: FormInput,
-  password: FormInput,
-  confirmPassword: FormInput
-}
+type InputValue = { value: string }
 
 export default class Signup extends Component<Props, State> {
 
@@ -30,21 +24,19 @@ export default class Signup extends Component<Props, State> {
     passwordError: false
   }
 
-  fields: FormFields = {
-    email: {value: ''},
-    password: {value: ''},
-    confirmPassword: {value: ''}
-  }
+  email: string = ''
+  password: string = ''
+  confirmPassword: string = ''
 
   handlePasswordValidation = () => {
-    const {password, confirmPassword} = this.fields
-    const passwordError = confirmPassword.value !== '' && password.value !== confirmPassword.value
+    const {password, confirmPassword} = this
+    const passwordError = confirmPassword !== '' && password !== confirmPassword
     this.setState({passwordError})
   }
 
   handleEmailValidation = () => {
-    const val = this.fields.email.value
-    const emailError = val.indexOf('@') < 0 || val.indexOf('.') < 0
+    const {email} = this
+    const emailError = email.indexOf('@') < 0 || email.indexOf('.') < 0
     this.setState({emailError})
   }
 
@@ -57,23 +49,24 @@ export default class Signup extends Component<Props, State> {
   handleSubmit = (event: Event): boolean => {
     if (event) event.preventDefault()
     if (this.hasFormErrors()) return false
-    const email = this.fields.email.value
-    const password = this.fields.password.value
+    const {email, password} = this
     const {onSubmit} = this.props
     onSubmit({email, password})
     return true
   }
 
-  refEmail = (input: FormInput) => {
-    this.fields.email = input
+  handleEmailChange = (event: Event, {value}: InputValue) => {
+    this.email = value
+    this.handleEmailValidation()
   }
 
-  refPassword = (input: FormInput) => {
-    this.fields.email = input
+  handlePasswordChange = (event: Event, {value}: InputValue) => {
+    this.password = value
   }
 
-  refConfirmPassword = (input: FormInput) => {
-    this.fields.email = input
+  handleConfirmPasswordChange = (event: Event, {value}: InputValue) => {
+    this.confirmPassword = value
+    this.handlePasswordValidation()
   }
 
   render() {
@@ -88,20 +81,18 @@ export default class Signup extends Component<Props, State> {
         <Form onSubmit={this.handleSubmit} size="large">
           <Form.Input
               error={this.state.emailError} icon="user" iconPosition="left"
-              name="email" onChange={this.handleEmailValidation}
-              placeholder="E-mail address" ref={this.refEmail}
-              type="email"
+              name="email" onChange={this.handleEmailChange}
+              placeholder="E-mail address" type="email"
           />
           <Form.Input
               icon="lock" iconPosition="left" name="password"
-              placeholder="Password" ref={this.refPassword}
+              onChange={this.handlePasswordChange} placeholder="Password"
               type="password"
           />
           <Form.Input
               error={this.state.passwordError} icon="lock" iconPosition="left"
-              name="confirm-password" onChange={this.handlePasswordValidation}
-              placeholder="Confirm password" ref={this.refConfirmPassword}
-              type="password"
+              name="confirm-password" onChange={this.handleConfirmPasswordChange}
+              placeholder="Confirm password" type="password"
           />
           <Button color="teal" fluid size="large" type="submit">Signup</Button>
         </Form>
