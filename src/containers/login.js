@@ -5,11 +5,16 @@ import * as actions from '../actions/user'
 import LoginForm from '../components/login-form'
 import Firewall from '../components/firewall'
 
-type Props = {
-  loginUser: (string, string) => void,
-  checkUserIsLogged: void,
+type StorePropsType = {
   loginState: boolean
 }
+
+type ActionsProps = {
+  loginUser: (string, string) => void,
+  checkUserIsLogged: () => void
+}
+
+type Props = StorePropsType & ActionsProps
 
 type HandleSubmitData = {
   email: string,
@@ -19,9 +24,8 @@ type HandleSubmitData = {
 class Login extends Component<Props> {
 
   componentWillMount() {
-    if (typeof this.props.checkUserIsLogged === 'function') {
-      this.props.checkUserIsLogged()
-    }
+    const {checkUserIsLogged} = this.props
+    checkUserIsLogged()
   }
 
   handleSubmit = ({email, password}: HandleSubmitData) => {
@@ -40,7 +44,7 @@ class Login extends Component<Props> {
   }
 }
 
-const mapState = (state) => ({
+const mapState = (state): StorePropsType => ({
   loginState: state.users.login
 })
 

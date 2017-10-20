@@ -4,16 +4,15 @@ import {Redirect} from 'react-router-dom'
 import {connect} from 'react-redux'
 import * as userActions from '../actions/user'
 
-type Props = {
-  logoutUser: void
+type ActionsType = {
+  logoutUser: () => void
 }
 
-class Logout extends PureComponent<Props> {
+class Logout extends PureComponent<ActionsType> {
 
   componentWillMount() {
-    if (typeof this.props.logoutUser === 'function') {
-      this.props.logoutUser()
-    }
+    const {logoutUser} = this.props
+    logoutUser()
   }
 
   render() {
