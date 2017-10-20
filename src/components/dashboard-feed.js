@@ -2,10 +2,16 @@
 import React from 'react'
 import {Grid, Header, Divider} from 'semantic-ui-react'
 import DashSidebar from '../components/dashboard-sidebar'
+import FeedItem, {FeedItemType} from './feed-item'
 
-const DashboardFeed = () => (
+type Props = {
+  feedType: string,
+  items: Array<FeedItemType>
+}
+
+const DashboardFeed = ({feedType, items}: Props) => (
   <Grid>
-    <Grid.Column width="four">
+    <Grid.Column width="4">
       <DashSidebar items={[
         {'/dashboard/experiences': 'Experience'},
         {'/dashboard/profile': 'Profile'},
@@ -13,14 +19,18 @@ const DashboardFeed = () => (
       ]}
       />
     </Grid.Column>
-    <Grid.Column className="dashboard-content" width="four">
+    <Grid.Column className="dashboard-content" width="12">
       <Grid.Row>
         <Header as="h1">
-          Your feed
+          Your {feedType} feed
         </Header>
       </Grid.Row>
-      <Divider/>
-      {'List of items in feed'}
+      <Divider hidden section/>
+      {
+        items ?
+          items.map((item, index) => <FeedItem isFirst={index === 0} key={index} {...item}/>)
+          : null
+      }
     </Grid.Column>
   </Grid>
 )

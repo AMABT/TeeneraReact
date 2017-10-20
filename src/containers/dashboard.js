@@ -6,6 +6,7 @@ import DashMenu from '../components/dashboard-menu'
 import Logout from '../components/logout';
 import DashboardFeed from '../components/dashboard-feed';
 import {Container, Divider} from 'semantic-ui-react'
+import ExperiencesList from './experiences-list';
 
 type Props = {
   loginState: boolean
@@ -24,6 +25,7 @@ const Dashboard = (props: Props) => {
         <Divider/>
         <Switch>
           <Route component={Logout} path="/dashboard/logout"/>
+          <Route component={ExperiencesList} path="/dashboard/experiences"/>
           <Route component={DashboardFeed}/>
         </Switch>
       </Container>
