@@ -5,7 +5,7 @@ type Action = {
   payload: Array<Object>
 }
 
-export const experiencesActions = (state: Object, action: Action) => {
+export const experiencesActions = (state: Object = {}, action: Action) => {
   switch (action.type) {
     case 'EXPERIENCES_FETCHED':
       return {...state, experiences: action.payload}
