@@ -2,7 +2,8 @@
 import React from 'react'
 import {Grid, Header, Divider} from 'semantic-ui-react'
 import DashSidebar from '../components/dashboard-sidebar'
-import FeedItem, {FeedItemType} from './feed-item'
+import FeedItem from './feed-item'
+import type {FeedItemType} from './feed-item'
 
 type Props = {
   feedType: string,

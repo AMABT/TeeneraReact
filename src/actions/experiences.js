@@ -1,8 +1,13 @@
 // @flow
 import {experiencesService} from '../feathers'
 
+type Dispatch = ({
+  type: string,
+  payload?: Array<Object>
+}) => void
+
 export const fetchAllExperiences = () => {
-  return async (dispatch) => {
+  return async (dispatch: Dispatch) => {
     dispatch({
       type: 'EXPERIENCES_FETCHING'
     })

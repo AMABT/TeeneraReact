@@ -30,6 +30,6 @@ class ExperiencesList extends PureComponent<Props> {
   }
 }
 
-export default connect((state: StorePropsType) => ({
+export default connect((state): StorePropsType => ({
   experiences: state.experiences.experiences
 }), actions)(ExperiencesList)
