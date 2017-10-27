@@ -1,10 +1,10 @@
 // @flow
 import {userService, app} from '../feathers/index';
 
-const localStorageUser = 'user';
+type Dispatch = ({ type: string, payload?: {} }) => void
 
 export const createUser = (email: string, password: string) => {
-  return (dispatch: ({ type: string, payload: {} }) => void) => {
+  return (dispatch: Dispatch) => {
     userService
       .create({
         email,
@@ -20,14 +20,13 @@ export const createUser = (email: string, password: string) => {
 }
 
 export const loginUser = (email: string, password: string) => {
-  return async (dispatch: ({ type: string }) => void) => {
+  return async (dispatch: Dispatch) => {
     dispatch({
       type: 'USER_LOGGING'
     })
     const response = await app.authenticate({strategy: 'local', email, password})
     // const payload = await app.passport.verifyJWT(response.accessToken)
     const user = response.user
-    localStorage.setItem(localStorageUser, JSON.stringify(user))
     dispatch({
       type: 'USER_LOGGED',
       payload: {user}
@@ -36,20 +35,27 @@ export const loginUser = (email: string, password: string) => {
 }
 
 export const checkUserIsLogged = () => {
-  let user = localStorage.getItem(localStorageUser);
-  if (user && (user = JSON.parse(user))) { /*eslint no-cond-assign: "off"*/
-    return {
-      type: 'USER_LOGGED',
-      payload: {user}
+  return async (dispatch: Dispatch) => {
+    dispatch({
+      type: 'USER_LOGGING'
+    })
+    try {
+      const {user} = await app.authenticate()
+      dispatch({
+        type: 'USER_LOGGED',
+        payload: {user}
+      })
+    } catch (err) {
+      dispatch({
+        type: 'USER_LOGGED_OUT',
+        payload: {err}
+      })
     }
-  }
-  return {
-    type: 'USER_NOT_LOGGED'
   }
 }
 
 export const logoutUser = () => {
-  localStorage.clear();
+  app.logout()
   return {
     type: 'USER_LOGGED_OUT'
   }

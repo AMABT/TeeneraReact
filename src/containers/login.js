@@ -1,5 +1,5 @@
 // @flow
-import React, {Component} from 'react'
+import React, {PureComponent} from 'react'
 import {connect} from 'react-redux'
 import * as actions from '../actions/user'
 import LoginForm from '../components/login-form'
@@ -21,11 +21,11 @@ type HandleSubmitData = {
   password: string
 }
 
-class Login extends Component<Props> {
+class Login extends PureComponent<Props> {
 
-  componentWillMount() {
-    const {checkUserIsLogged} = this.props
-    checkUserIsLogged()
+  componentDidMount() {
+    const {checkUserIsLogged, loginState} = this.props
+    if (!loginState) checkUserIsLogged()
   }
 
   handleSubmit = ({email, password}: HandleSubmitData) => {
@@ -45,7 +45,8 @@ class Login extends Component<Props> {
 }
 
 const mapState = (state): StorePropsType => ({
-  loginState: state.users.login
+  loginState: state.users.login,
+  loading: state.users.loading
 })
 
 export default connect(mapState, actions)(Login)
